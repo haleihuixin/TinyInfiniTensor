@@ -71,7 +71,7 @@ namespace infini
         // =================================== 作业 ===================================
         auto Dtype = getOutputDataType();
         auto num = inputs.size();
-        return std::vector<DataType>(num, dtype);
+        return std::vector<DataType>(num, Dtype);
     }
 
     optional<vector<Shape>> CastObj::inferShape(const TensorVec &inputs)
