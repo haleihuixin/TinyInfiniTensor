@@ -39,6 +39,9 @@ namespace infini
         // TODO：返回经过 clip 操作后的 shape
         // REF: https://onnx.ai/onnx/operators/onnx__Clip.html#clip-13
         // =================================== 作业 ===================================
+        if (!inputs.empty()) {
+            return {{inputs[0]->getDims()}};
+        }
         return std::nullopt;
     }
 
@@ -66,7 +69,9 @@ namespace infini
         // REF_FILE: src/core/operator.cc
         // REF: https://onnx.ai/onnx/operators/onnx__Cast.html#cast-21
         // =================================== 作业 ===================================
-        return {};
+        auto Dtype = getOutputDataType();
+        auto num = inputs.size();
+        return std::vector<DataType>(num, dtype);
     }
 
     optional<vector<Shape>> CastObj::inferShape(const TensorVec &inputs)
@@ -75,6 +80,9 @@ namespace infini
         // TODO：返回经过 cast 操作后的 shape
         // REF: https://onnx.ai/onnx/operators/onnx__Cast.html#cast-21
         // =================================== 作业 ===================================
+        if (!inputs.empty()) {
+            return {{inputs[0]->getDims()}};
+        }
         return std::nullopt;
     }
 
